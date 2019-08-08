@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int question = 14;
+int question = 15;
 
 //1.1 Is Unique
 bool isUnique(string my_string) {
@@ -98,6 +98,42 @@ bool palinPerm(string my_string) {
 	return result;
 }
 
+//1.5 One Away
+bool oneAway(string string_a, string string_b) {
+	bool result = false;
+	int length_a = string_a.size();
+	int length_b = string_b.size();
+	int length;	//length to base loop off of
+	if (length_a >= length_b) {
+		length = length_a;
+	}
+	else {
+		length = length_b;
+	}
+	int d = 0;//offset between strings
+	int diffs = 0;//number of differences (only 1 allowed-hence ONE away)
+	for (int i = 0; i < length; i++) {
+		if (string_a[i] != string_b[i + d]) {
+			diffs += 1;
+			if (length_a > length_b) {
+				d = -1;
+			}
+			if (length_b > length_a) {
+				d = 1;
+			}
+		}
+		if (diffs > 1) {
+			return result;
+		}
+	}
+	result = true;
+	return result;
+}
+
+//1.6 String compression
+
+//1.7 Rotate matrix
+
 
 
 int main() {
@@ -106,6 +142,7 @@ int main() {
 	string string_b = "nogo";
 	string stringy = "Hello my name is Meredith.";
 	string stringyy = "racecar";
+	string new_string;
 
 	switch(question) {
 	case 11:
@@ -130,13 +167,20 @@ int main() {
 
 	case 13:
 		//1.3 test
-		cout << URLify(stringy) << endl;
+		new_string=URLify(stringy);
 
 	case 14:
 		//1.4 test
-		cout << palinPerm(stringyy) << endl;
+		result = palinPerm(stringyy);
+
+	case 15:
+		//1.5 test
+		string_a = "helllop";
+		string_b = "helloo";
+		result = oneAway(string_b, string_a);
 	}
 	
+	cout << result << endl;
 	system("pause");
 	return 0;
 }
