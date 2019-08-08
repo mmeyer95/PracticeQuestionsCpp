@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//1.1 Is Unique
 bool isUnique(string my_string) {
 	bool uniqueness = true;
 	for(int i = 0; i < my_string.size(); i++) {
@@ -17,7 +18,7 @@ bool isUnique(string my_string) {
 	return uniqueness;
 }
 
-//initially assuming spaces will not be considered
+//1.2 Check Permutation
 bool isPermutation(string string_a, string string_b) {
 	bool isPerm = false;
 	if(string_a.size() != string_b.size()) {
@@ -45,9 +46,54 @@ bool isPermutation(string string_a, string string_b) {
 	return isPerm;
 }
 
+//1.3 URLify
+string URLify(string my_string) {
+	string new_string;
+	for (int i = 0; i < my_string.size(); i++) {
+		if (my_string[i] == ' ') {
+			new_string+="%20";
+		}
+		else {
+			new_string+=my_string[i];
+		}
+	}
+	return new_string;
+}
+
+//1.4 Palindrome permutation
+bool palinPerm(string my_string) {
+	bool result = false;
+	vector<int> checked(my_string.size(), 0);
+	int odd = 0;
+	//a word is a permutation of a palindrome if every letter is present in even numbers except at most 1
+	for (int i = 0; i < my_string.size(); i++) {
+		if (checked[i] == 1) {
+			break;
+		}
+		int count = 1;
+		for (int j = i + 1; j < my_string.size(); j++) {
+			if (checked[j] == 1) {
+				break;
+			}
+			else if (my_string[i] == my_string[j]) {
+				count += 1;
+			}
+		}
+		if (count % 2) {
+			odd += 1;
+			if (odd > 1) {
+				return result;
+			}
+		}
+	}
+	result = true;
+	return result;
+}
+
 
 
 int main() {
+	//1.1 test
 	string string_a = "bazingo";
 	bool result = isUnique(string_a);
 	if (result == 1) {
@@ -58,6 +104,7 @@ int main() {
 	}
 	system("pause");
 
+	//1.2 test
 	string string_b = "nogo";
 	result = isPermutation(string_a, string_b);
 	if (result == 1) {
@@ -66,6 +113,19 @@ int main() {
 	else {
 		std::cout << "'" << string_b << "' is NOT a permutation of '" << string_a << "'." << std::endl;
 	}
+
+	system("pause");
+
+	//1.3 test
+	string stringy = "Hello my name is Meredith.";
+	cout << URLify(stringy) << endl;
+
+	system("pause");
+
+	//1.4 test
+	string stringy = "racecar";
+	cout << palinPerm(stringy) << endl;
+
 
 	system("pause");
 	return 0;
