@@ -1,9 +1,3 @@
 # Practice Questions in C++
 
-### Arrays and Strings
-
-### Linked Lists
-
-### Queues and Stacks
-
-### Graphs and Trees
+An assortment of Computer Science practice questions and exercises in C++
