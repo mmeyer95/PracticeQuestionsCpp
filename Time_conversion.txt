@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+string timeConversion(string s) {
+    string hour_s=s.substr(0,2);
+    if (s[8]=='A'){
+        if(!hour_s.compare("12")){
+            hour_s="00";
+        }
+    }
+    else {
+        if (hour_s.compare("12")){
+            int hour=stoi(hour_s, nullptr,10);
+            hour+=12;
+            hour_s=to_string(hour);
+            if (hour_s.size()<2){
+                hour_s="0"+hour;
+            }
+        }
+    }
+    string converted=hour_s+s.substr(2,6);
+    return converted;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string s;
+    getline(cin, s);
+
+    string result = timeConversion(s);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
