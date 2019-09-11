@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int question = 15;
+int question = 16;
 
 //1.1 Is Unique
 bool isUnique(string my_string) {
@@ -131,6 +131,24 @@ bool oneAway(string string_a, string string_b) {
 }
 
 //1.6 String compression
+string compressString(string my_string) {
+	string new_string = "";
+	int index = 0;
+	int count = 1;
+	while (index<my_string.size()) {
+		new_string += my_string[index];
+		while (my_string[index + count] == my_string[index]) {
+			++count;
+		}
+		index += count;
+		new_string += to_string(count);
+		count = 1;
+	}
+	if (new_string.size() > my_string.size()) {
+		new_string = my_string;
+	}
+	return new_string;
+}
 
 //1.7 Rotate matrix
 
@@ -178,9 +196,18 @@ int main() {
 		string_a = "helllop";
 		string_b = "helloo";
 		result = oneAway(string_b, string_a);
+
+
+	case 16:
+		//1.6 test
+		string_a = "abcd";
+		new_string = compressString(string_a);
+
 	}
+
+
 	
-	cout << result << endl;
+	cout << new_string << endl;
 	system("pause");
 	return 0;
 }
