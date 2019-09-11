@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+/*
+ * Complete the pageCount function below.
+ */
+int pageCount(int n, int p) {
+    int turns=0;
+    if (p<=n/2){
+        turns=p/2;
+    }
+    else{
+        int end=n;
+        if (!(n%2)){
+            end+=1;
+        }
+        cout << "end= "<<end<<", p= "<<p<<endl;
+        turns=(end-p)/2;
+        cout<<turns<<" turns."<<endl;
+    }
+    return turns;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    int p;
+    cin >> p;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    int result = pageCount(n, p);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
