@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the hourglassSum function below.
+int hourglassSum(vector<vector<int>> arr) {
+    int rows = arr.size();          //number of rows
+    int cols = arr[0].size();       //number of columns
+    int max_sum = -1000000;         //maximum sum
+
+    //Loop through each hourglass
+    for (int start_row=0; start_row<rows-2; start_row++){
+        for (int start_col=0; start_col<cols-2; start_col++){
+
+            //Calculate the sum for each hourglass by subtracting out the 2 sides
+            //from the total sum of the 3x3 matric
+            int curr_sum = 0;
+            for (int r=0; r<=2; r++){
+                for (int c=0; c<=2; c++){
+                    //std::cout << "ar["<<start_row+r<<"]["<<start_col+c<<"]="<<arr[start_row+r][start_col+c]<<endl;
+                    curr_sum+=arr[start_row+r][start_col+c];
+                    //std::cout << "Current sum: " << curr_sum << endl;
+                }
+            }
+            curr_sum-=arr[start_row+1][start_col];
+            curr_sum-=arr[start_row+1][start_col+2];
+            //std::cout << "Final sum: " << curr_sum << endl;
+            if (curr_sum>max_sum){
+                max_sum = curr_sum;
+            }
+            //std::cout << "Max sum: " << max_sum << endl;
+        }
+    }
+    return max_sum;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    vector<vector<int>> arr(6);
+    for (int i = 0; i < 6; i++) {
+        arr[i].resize(6);
+
+        for (int j = 0; j < 6; j++) {
+            cin >> arr[i][j];
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    int result = hourglassSum(arr);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
